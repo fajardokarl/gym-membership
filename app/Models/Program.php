@@ -13,5 +13,7 @@ class Program extends Model
         'name',
         'code',
         'description',
+        'price',
+        'price_updated',
     ];
 }
