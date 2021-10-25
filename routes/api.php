@@ -1,6 +1,9 @@
 <?php
 
-use App\Http\Controllers\Api\MembersController;
+use App\Http\Controllers\Api\{
+    MembersController,
+    ProgramsController
+};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,3 +25,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // members
 Route::get('search/members', [MembersController::class, 'search']);
 Route::apiResource('members', MembersController::class, ['search']);
+
+// programs
+Route::apiResource('programs', ProgramsController::class, ['search']);
