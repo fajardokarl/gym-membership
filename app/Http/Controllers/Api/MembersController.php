@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Member;
 use Illuminate\Http\Request;
 use App\Http\Requests\MembersRequest;
+use App\Http\Resources\MemberResource;
 
 class MembersController extends Controller
 {
@@ -16,7 +17,7 @@ class MembersController extends Controller
      */
     public function index()
     {
-        return Member::paginate(15);
+        return MemberResource::collection(Member::paginate(15));
     }
 
     /**
@@ -42,7 +43,7 @@ class MembersController extends Controller
             return response()->json('Member not found.', 404); 
         }
         
-        return $member;
+        return MemberResource::collection($member->get());
     }
 
     /**
@@ -82,6 +83,7 @@ class MembersController extends Controller
      */
     public function search(Request $request)
     {
-        return Member::search($request->input('q'))->paginate(15);
+        $result = Member::search($request->input('q'))->paginate(15);
+        return MemberResource::collection($result);
     }
 }
