@@ -29,6 +29,7 @@ Route::apiResource('members', MembersController::class);
 
 // programs
 Route::apiResource('programs', ProgramsController::class);
+Route::get('programs/{program}/members/{active?}', [ProgramsController::class, 'members'])->name('programs.members');
 
 // trainer
 Route::apiResource('trainers', TrainersController::class);

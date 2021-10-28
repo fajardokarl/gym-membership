@@ -13,7 +13,7 @@ class CreateMembersProgramsTable extends Migration
      */
     public function up()
     {
-        Schema::create('members_programs', function (Blueprint $table) {
+        Schema::create('member_program', function (Blueprint $table) {
             $table->id();
             $table->foreignId('members_id')
                 ->constrained('members')

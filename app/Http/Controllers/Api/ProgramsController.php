@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\ProgramsResource;
 use App\Models\Program;
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\Types\Boolean;
 
 class ProgramsController extends Controller
 {
@@ -72,5 +73,16 @@ class ProgramsController extends Controller
         $program->delete();
 
         return response()->json('Program deleted successfully');
+    }
+
+    public function members(Program $program, $active = false) {
+        return $program::with(['members' => fn ($q) => 
+            $q->when($active === 'active', fn ($q) =>
+                $q->where([
+                    ['start_date', '<=', now()],
+                    ['end_date', '>=', now()],
+                ])
+            )
+        ])->paginate();
     }
 }

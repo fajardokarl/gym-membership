@@ -21,6 +21,7 @@ class ProgramsResource extends JsonResource
             'description' => $this->description,
             'price' => $this->price,
             'price_updated' => $this->price_updated,
+            'members' => MemberResource::collection($this->whenLoaded('members'))
         ];
     }
 }
