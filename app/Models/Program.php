@@ -16,4 +16,11 @@ class Program extends Model
         'price',
         'price_updated',
     ];
+
+    public function members()
+    {
+        return $this->belongsToMany(Member::class)
+            ->withPivot(['start_date', 'end_date'])
+            ->as('period');
+    }
 }
